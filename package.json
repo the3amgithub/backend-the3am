@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint --ignore-path .eslintignore \"src/**/*.ts\" --fix",
-    "lint:check": "eslint --ignore-path .eslintignore \"src/**/*.ts\"",
+    "test:eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "fix:eslint": "eslint . --fix --quiet --ignore-path .eslintignore",
+    "typecheck": "tsc --pretty --noEmit",
+    "prettier-format": "prettier \"server/**/*.ts\" --write",
     "prepare": "husky install",
     "dev": "nodemon server/server.ts",
     "build": "tsc --project tsconfig.json",
