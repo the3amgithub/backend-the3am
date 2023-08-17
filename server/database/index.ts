@@ -1,16 +1,13 @@
-import sql from 'mysql'
+import mongoose from 'mongoose'
 
-const sqlConnection = async () => {
-  const config = {
-    user: 'root',
-    password: 'infotech',
-    host: 'localhost',
-    database: 'xda_blogs',
+const initiateMongoServer = (DB_URL: string) => {
+  try {
+    mongoose.set('strictQuery', false)
+    mongoose.connect(DB_URL)
+    console.info('Connected to DB')
+  } catch (err) {
+    throw new Error(err)
   }
-  const connection = sql.createConnection(config)
-  connection.connect((err) => {
-    if (err) throw err
-  })
-  console.log('database connected')
 }
-export default sqlConnection
+
+export default initiateMongoServer

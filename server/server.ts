@@ -1,26 +1,23 @@
+import './init-aliases'
 import express from 'express'
-import initializeApolloServer from './initGraphQLServer'
-import cors from 'cors'
-import { json } from 'body-parser'
-import { expressMiddleware } from '@apollo/server/express4'
+import bodyParser from 'body-parser'
 import { config } from 'dotenv'
+import userRouter from './Routes/userRoutes'
+import initiateMongoServer from './Database'
+import imgRouter from './services/imgUpload'
+import cors from 'cors'
+import vechicleCategoryRouter from './Routes/vehicleCategoryRoutes'
 const app: express.Application = express()
-
 const PORT = 8080
-const init = async () => {
-  config()
-  app.listen(PORT, async () => {
-    const apolloServer = initializeApolloServer()
-    await apolloServer.start()
-    app.use(
-      '/graphql',
-      cors<cors.CorsRequest>(),
-      json(),
-      expressMiddleware(apolloServer, {}),
-    )
-    console.log(
-      `🚀 Query endpoint ready at http://localhost:${PORT}/graphql \n`,
-    )
-  })
-}
-init()
+const defaultRoute = '/carRental'
+app.use(bodyParser.json())
+app.use(cors())
+app.use(express.static('uploads'))
+app.use(defaultRoute, imgRouter)
+app.use(defaultRoute, userRouter)
+app.use(defaultRoute, vechicleCategoryRouter)
+config()
+app.listen(PORT, () => {
+  initiateMongoServer(process.env.DB_URL)
+  console.log(`🚀 Query endpoint ready at http://localhost:${PORT}`)
+})

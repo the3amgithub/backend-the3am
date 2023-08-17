@@ -19,7 +19,7 @@
     "isolatedModules": false,
     "outDir": "./dist",
     "paths": {
-      "@server/*": ["./server/*"],
+      "@/*": ["./server/*"] ,
     }
   },
   "exclude": [
