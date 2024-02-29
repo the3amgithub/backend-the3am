@@ -4,15 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "test:eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "fix:eslint": "eslint . --fix --quiet --ignore-path .eslintignore",
-    "typecheck": "tsc --pretty --noEmit",
-    "prettier-format": "prettier \"server/**/*.ts\" --write",
-    "prepare": "husky install",
     "dev": "nodemon server/server.ts",
     "build": "tsc --project tsconfig.json",
-    "start": "node dist/server.js ",
+    "start": "node dist/server/server.js ",
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "author": "",
