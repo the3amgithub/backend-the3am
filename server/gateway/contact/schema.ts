@@ -1,4 +1,4 @@
-import CreateContactResolver from './resolvers/CreateContactResolver'
+import CreateContactResolver from './resolvers/createContactResolver'
 import getContactsResolver from './resolvers/getContactsResolver'
 import Contact from './types/Contact'
 import ContactInput from './types/ContactInput'

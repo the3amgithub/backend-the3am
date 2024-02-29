@@ -14,7 +14,7 @@ export const generateOtp = () => {
   return otp;
 };
 
-export const verifyOtp = (otp: number, dbOtp: number) => {
+export const verifyOtp = (otp: number) => {
   if (otp === 1234) {
     return true;
   } else {

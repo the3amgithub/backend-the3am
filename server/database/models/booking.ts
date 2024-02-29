@@ -1,6 +1,6 @@
 import { Schema, Types, model } from 'mongoose'
 
-export type Booking = {
+export interface Booking {
   _id: string
   userId: Types.ObjectId
   eventId: Types.ObjectId

@@ -9,7 +9,7 @@ export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> =
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
-export type Scalars = {
+export interface Scalars {
   ID: { input: string; output: string; }
   String: { input: string; output: string; }
   Boolean: { input: boolean; output: boolean; }
@@ -17,15 +17,15 @@ export type Scalars = {
   Float: { input: number; output: number; }
   /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   Date: { input: any; output: any; }
-};
+}
 
-export type BookingInputType = {
+export interface BookingInputType {
   eventId: Scalars['ID']['input'];
   quantity: Scalars['Int']['input'];
   ticketId: Scalars['ID']['input'];
-};
+}
 
-export type BookingType = {
+export interface BookingType {
   __typename?: 'BookingType';
   _id: Scalars['ID']['output'];
   event: EventType;
@@ -33,34 +33,34 @@ export type BookingType = {
   ticket: TicketType;
   totalPrice: Scalars['Int']['output'];
   user: User;
-};
+}
 
-export type Contact = {
+export interface Contact {
   __typename?: 'Contact';
   _id: Scalars['ID']['output'];
   bookingQuery?: Maybe<ContactInfoType>;
   conversation?: Maybe<ContactInfoType>;
   moreInfo?: Maybe<ContactInfoType>;
-};
+}
 
-export type ContactInfoInputType = {
+export interface ContactInfoInputType {
   email?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   label?: InputMaybe<Scalars['String']['input']>;
-};
+}
 
-export type ContactInfoType = {
+export interface ContactInfoType {
   __typename?: 'ContactInfoType';
   email?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   label?: Maybe<Scalars['String']['output']>;
-};
+}
 
-export type ContactInput = {
+export interface ContactInput {
   bookingQuery?: InputMaybe<ContactInfoInputType>;
   conversation?: InputMaybe<ContactInfoInputType>;
   moreInfo?: InputMaybe<ContactInfoInputType>;
-};
+}
 
-export type EditEventInput = {
+export interface EditEventInput {
   _id: Scalars['ID']['input'];
   banner?: InputMaybe<Scalars['String']['input']>;
   date?: InputMaybe<Scalars['Date']['input']>;
@@ -69,22 +69,22 @@ export type EditEventInput = {
   name?: InputMaybe<Scalars['String']['input']>;
   tableLayout?: InputMaybe<Scalars['String']['input']>;
   tickets?: InputMaybe<Array<InputMaybe<EditTicketInput>>>;
-};
+}
 
-export type EditTicketInput = {
+export interface EditTicketInput {
   _id: Scalars['ID']['input'];
   category?: InputMaybe<Scalars['String']['input']>;
   price?: InputMaybe<Scalars['Int']['input']>;
   quantity?: InputMaybe<Scalars['Int']['input']>;
-};
+}
 
-export type ErrorType = {
+export interface ErrorType {
   __typename?: 'ErrorType';
   code: Scalars['String']['output'];
   message: Scalars['String']['output'];
-};
+}
 
-export type EventInput = {
+export interface EventInput {
   banner: Scalars['String']['input'];
   date: Scalars['Date']['input'];
   description: Scalars['String']['input'];
@@ -92,21 +92,21 @@ export type EventInput = {
   name: Scalars['String']['input'];
   tableLayout: Scalars['String']['input'];
   tickets?: InputMaybe<Array<InputMaybe<EventTicketInput>>>;
-};
+}
 
-export type EventPayload = {
+export interface EventPayload {
   __typename?: 'EventPayload';
   error?: Maybe<ErrorType>;
   event?: Maybe<EventType>;
-};
+}
 
-export type EventTicketInput = {
+export interface EventTicketInput {
   category: Scalars['String']['input'];
   price: Scalars['Int']['input'];
   quantity: Scalars['Int']['input'];
-};
+}
 
-export type EventType = {
+export interface EventType {
   __typename?: 'EventType';
   _id: Scalars['ID']['output'];
   banner: Scalars['String']['output'];
@@ -116,15 +116,15 @@ export type EventType = {
   name: Scalars['String']['output'];
   tableLayout: Scalars['String']['output'];
   tickets: Array<Maybe<TicketType>>;
-};
+}
 
-export type EventsList = {
+export interface EventsList {
   __typename?: 'EventsList';
   pastEvents?: Maybe<Array<Maybe<EventType>>>;
   upcomingEvents?: Maybe<Array<Maybe<EventType>>>;
-};
+}
 
-export type Mutation = {
+export interface Mutation {
   __typename?: 'Mutation';
   authBasic: UserPayload;
   createBooking?: Maybe<Array<Maybe<BookingType>>>;
@@ -133,101 +133,101 @@ export type Mutation = {
   editEVent: EventPayload;
   registerUser: UserPayload;
   verifyUser: UserPayload;
-};
+}
 
 
-export type MutationAuthBasicArgs = {
+export interface MutationAuthBasicArgs {
   phone?: InputMaybe<Scalars['String']['input']>;
-};
+}
 
 
-export type MutationCreateBookingArgs = {
+export interface MutationCreateBookingArgs {
   input: Array<InputMaybe<BookingInputType>>;
-};
+}
 
 
-export type MutationCreateContactArgs = {
+export interface MutationCreateContactArgs {
   input?: InputMaybe<ContactInput>;
-};
+}
 
 
-export type MutationCreateEventArgs = {
+export interface MutationCreateEventArgs {
   input: EventInput;
-};
+}
 
 
-export type MutationEditEVentArgs = {
+export interface MutationEditEVentArgs {
   input?: InputMaybe<EditEventInput>;
-};
+}
 
 
-export type MutationRegisterUserArgs = {
+export interface MutationRegisterUserArgs {
   input?: InputMaybe<SignupInput>;
-};
+}
 
 
-export type MutationVerifyUserArgs = {
+export interface MutationVerifyUserArgs {
   _id?: InputMaybe<Scalars['ID']['input']>;
   otp?: InputMaybe<Scalars['Int']['input']>;
-};
+}
 
-export type Query = {
+export interface Query {
   __typename?: 'Query';
   getBookings?: Maybe<Array<Maybe<BookingType>>>;
   getContacts?: Maybe<Contact>;
   getEvent?: Maybe<EventType>;
   getEvents?: Maybe<EventsList>;
   me?: Maybe<Scalars['String']['output']>;
-};
+}
 
 
-export type QueryGetEventArgs = {
+export interface QueryGetEventArgs {
   id: Scalars['ID']['input'];
-};
+}
 
-export type SignupInput = {
+export interface SignupInput {
   email: Scalars['String']['input'];
   name: Scalars['String']['input'];
   phone: Scalars['String']['input'];
-};
+}
 
-export type TicketType = {
+export interface TicketType {
   __typename?: 'TicketType';
   _id: Scalars['ID']['output'];
   availableTickets: Scalars['Int']['output'];
   category: Scalars['String']['output'];
   price: Scalars['Int']['output'];
   quantity: Scalars['Int']['output'];
-};
+}
 
-export type User = {
+export interface User {
   __typename?: 'User';
   _id: Scalars['ID']['output'];
   email?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   phone: Scalars['String']['output'];
-};
+}
 
-export type UserPayload = {
+export interface UserPayload {
   __typename?: 'UserPayload';
   error?: Maybe<ErrorType>;
   token?: Maybe<Scalars['String']['output']>;
   user?: Maybe<User>;
-};
+}
 
-export type AdditionalEntityFields = {
+export interface AdditionalEntityFields {
   path?: InputMaybe<Scalars['String']['input']>;
   type?: InputMaybe<Scalars['String']['input']>;
-};
+}
 
 
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
 
-export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
+export interface ResolverWithResolve<TResult, TParent, TContext, TArgs> {
   resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
-};
+}
 export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> = ResolverFn<TResult, TParent, TContext, TArgs> | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
 
 export type ResolverFn<TResult, TParent, TContext, TArgs> = (
@@ -290,7 +290,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 
 /** Mapping between all available schema types and the resolvers types */
-export type ResolversTypes = {
+export interface ResolversTypes {
   BookingInputType: BookingInputType;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
@@ -317,10 +317,10 @@ export type ResolversTypes = {
   UserPayload: ResolverTypeWrapper<UserPayload>;
   AdditionalEntityFields: AdditionalEntityFields;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
-};
+}
 
 /** Mapping between all available schema types and the resolvers parents */
-export type ResolversParentTypes = {
+export interface ResolversParentTypes {
   BookingInputType: BookingInputType;
   ID: Scalars['ID']['output'];
   Int: Scalars['Int']['output'];
@@ -347,56 +347,56 @@ export type ResolversParentTypes = {
   UserPayload: UserPayload;
   AdditionalEntityFields: AdditionalEntityFields;
   Boolean: Scalars['Boolean']['output'];
-};
+}
 
-export type UnionDirectiveArgs = {
+export interface UnionDirectiveArgs {
   discriminatorField?: Maybe<Scalars['String']['input']>;
   additionalFields?: Maybe<Array<Maybe<AdditionalEntityFields>>>;
-};
+}
 
 export type UnionDirectiveResolver<Result, Parent, ContextType = any, Args = UnionDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
-export type AbstractEntityDirectiveArgs = {
+export interface AbstractEntityDirectiveArgs {
   discriminatorField: Scalars['String']['input'];
   additionalFields?: Maybe<Array<Maybe<AdditionalEntityFields>>>;
-};
+}
 
 export type AbstractEntityDirectiveResolver<Result, Parent, ContextType = any, Args = AbstractEntityDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
-export type EntityDirectiveArgs = {
+export interface EntityDirectiveArgs {
   embedded?: Maybe<Scalars['Boolean']['input']>;
   additionalFields?: Maybe<Array<Maybe<AdditionalEntityFields>>>;
-};
+}
 
 export type EntityDirectiveResolver<Result, Parent, ContextType = any, Args = EntityDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
-export type ColumnDirectiveArgs = {
+export interface ColumnDirectiveArgs {
   overrideType?: Maybe<Scalars['String']['input']>;
-};
+}
 
 export type ColumnDirectiveResolver<Result, Parent, ContextType = any, Args = ColumnDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
-export type IdDirectiveArgs = { };
+export interface IdDirectiveArgs { }
 
 export type IdDirectiveResolver<Result, Parent, ContextType = any, Args = IdDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
-export type LinkDirectiveArgs = {
+export interface LinkDirectiveArgs {
   overrideType?: Maybe<Scalars['String']['input']>;
-};
+}
 
 export type LinkDirectiveResolver<Result, Parent, ContextType = any, Args = LinkDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
-export type EmbeddedDirectiveArgs = { };
+export interface EmbeddedDirectiveArgs { }
 
 export type EmbeddedDirectiveResolver<Result, Parent, ContextType = any, Args = EmbeddedDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
-export type MapDirectiveArgs = {
+export interface MapDirectiveArgs {
   path: Scalars['String']['input'];
-};
+}
 
 export type MapDirectiveResolver<Result, Parent, ContextType = any, Args = MapDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
-export type BookingTypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['BookingType'] = ResolversParentTypes['BookingType']> = {
+export interface BookingTypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['BookingType'] = ResolversParentTypes['BookingType']> {
   _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   event?: Resolver<ResolversTypes['EventType'], ParentType, ContextType>;
   quantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -404,39 +404,39 @@ export type BookingTypeResolvers<ContextType = any, ParentType extends Resolvers
   totalPrice?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}
 
-export type ContactResolvers<ContextType = any, ParentType extends ResolversParentTypes['Contact'] = ResolversParentTypes['Contact']> = {
+export interface ContactResolvers<ContextType = any, ParentType extends ResolversParentTypes['Contact'] = ResolversParentTypes['Contact']> {
   _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   bookingQuery?: Resolver<Maybe<ResolversTypes['ContactInfoType']>, ParentType, ContextType>;
   conversation?: Resolver<Maybe<ResolversTypes['ContactInfoType']>, ParentType, ContextType>;
   moreInfo?: Resolver<Maybe<ResolversTypes['ContactInfoType']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}
 
-export type ContactInfoTypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['ContactInfoType'] = ResolversParentTypes['ContactInfoType']> = {
+export interface ContactInfoTypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['ContactInfoType'] = ResolversParentTypes['ContactInfoType']> {
   email?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   label?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Date'], any> {
-  name: 'Date';
 }
 
-export type ErrorTypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['ErrorType'] = ResolversParentTypes['ErrorType']> = {
+export type DateScalarConfig = {
+  name: 'Date';
+} & GraphQLScalarTypeConfig<ResolversTypes['Date'], any>
+
+export interface ErrorTypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['ErrorType'] = ResolversParentTypes['ErrorType']> {
   code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}
 
-export type EventPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['EventPayload'] = ResolversParentTypes['EventPayload']> = {
+export interface EventPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['EventPayload'] = ResolversParentTypes['EventPayload']> {
   error?: Resolver<Maybe<ResolversTypes['ErrorType']>, ParentType, ContextType>;
   event?: Resolver<Maybe<ResolversTypes['EventType']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}
 
-export type EventTypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['EventType'] = ResolversParentTypes['EventType']> = {
+export interface EventTypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['EventType'] = ResolversParentTypes['EventType']> {
   _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   banner?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   date?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
@@ -446,15 +446,15 @@ export type EventTypeResolvers<ContextType = any, ParentType extends ResolversPa
   tableLayout?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   tickets?: Resolver<Array<Maybe<ResolversTypes['TicketType']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}
 
-export type EventsListResolvers<ContextType = any, ParentType extends ResolversParentTypes['EventsList'] = ResolversParentTypes['EventsList']> = {
+export interface EventsListResolvers<ContextType = any, ParentType extends ResolversParentTypes['EventsList'] = ResolversParentTypes['EventsList']> {
   pastEvents?: Resolver<Maybe<Array<Maybe<ResolversTypes['EventType']>>>, ParentType, ContextType>;
   upcomingEvents?: Resolver<Maybe<Array<Maybe<ResolversTypes['EventType']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}
 
-export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+export interface MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> {
   authBasic?: Resolver<ResolversTypes['UserPayload'], ParentType, ContextType, Partial<MutationAuthBasicArgs>>;
   createBooking?: Resolver<Maybe<Array<Maybe<ResolversTypes['BookingType']>>>, ParentType, ContextType, RequireFields<MutationCreateBookingArgs, 'input'>>;
   createContact?: Resolver<Maybe<ResolversTypes['Contact']>, ParentType, ContextType, Partial<MutationCreateContactArgs>>;
@@ -462,41 +462,41 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   editEVent?: Resolver<ResolversTypes['EventPayload'], ParentType, ContextType, Partial<MutationEditEVentArgs>>;
   registerUser?: Resolver<ResolversTypes['UserPayload'], ParentType, ContextType, Partial<MutationRegisterUserArgs>>;
   verifyUser?: Resolver<ResolversTypes['UserPayload'], ParentType, ContextType, Partial<MutationVerifyUserArgs>>;
-};
+}
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+export interface QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> {
   getBookings?: Resolver<Maybe<Array<Maybe<ResolversTypes['BookingType']>>>, ParentType, ContextType>;
   getContacts?: Resolver<Maybe<ResolversTypes['Contact']>, ParentType, ContextType>;
   getEvent?: Resolver<Maybe<ResolversTypes['EventType']>, ParentType, ContextType, RequireFields<QueryGetEventArgs, 'id'>>;
   getEvents?: Resolver<Maybe<ResolversTypes['EventsList']>, ParentType, ContextType>;
   me?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-};
+}
 
-export type TicketTypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['TicketType'] = ResolversParentTypes['TicketType']> = {
+export interface TicketTypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['TicketType'] = ResolversParentTypes['TicketType']> {
   _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   availableTickets?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   category?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   price?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   quantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}
 
-export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
+export interface UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> {
   _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   phone?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}
 
-export type UserPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserPayload'] = ResolversParentTypes['UserPayload']> = {
+export interface UserPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserPayload'] = ResolversParentTypes['UserPayload']> {
   error?: Resolver<Maybe<ResolversTypes['ErrorType']>, ParentType, ContextType>;
   token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}
 
-export type Resolvers<ContextType = any> = {
+export interface Resolvers<ContextType = any> {
   BookingType?: BookingTypeResolvers<ContextType>;
   Contact?: ContactResolvers<ContextType>;
   ContactInfoType?: ContactInfoTypeResolvers<ContextType>;
@@ -510,9 +510,9 @@ export type Resolvers<ContextType = any> = {
   TicketType?: TicketTypeResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
   UserPayload?: UserPayloadResolvers<ContextType>;
-};
+}
 
-export type DirectiveResolvers<ContextType = any> = {
+export interface DirectiveResolvers<ContextType = any> {
   union?: UnionDirectiveResolver<any, any, ContextType>;
   abstractEntity?: AbstractEntityDirectiveResolver<any, any, ContextType>;
   entity?: EntityDirectiveResolver<any, any, ContextType>;
@@ -521,6 +521,6 @@ export type DirectiveResolvers<ContextType = any> = {
   link?: LinkDirectiveResolver<any, any, ContextType>;
   embedded?: EmbeddedDirectiveResolver<any, any, ContextType>;
   map?: MapDirectiveResolver<any, any, ContextType>;
-};
+}
 
 import { ObjectId } from 'mongodb';

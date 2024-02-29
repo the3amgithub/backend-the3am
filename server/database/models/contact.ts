@@ -1,6 +1,6 @@
 import { Schema, Types, model } from 'mongoose'
 
-export type Contact = {
+export interface Contact {
   _id: Types.ObjectId
   moreInfo: {
     label: string

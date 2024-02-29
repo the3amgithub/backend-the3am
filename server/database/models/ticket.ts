@@ -1,6 +1,6 @@
 import { Schema, Types, model } from 'mongoose'
 
-export type Ticket = {
+export interface Ticket {
   _id: string
   event: Types.ObjectId
   category: string

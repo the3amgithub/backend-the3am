@@ -1,4 +1,4 @@
-import { Error } from "@server/Gateway/types";
+import { Error } from "@/gateway/types";
 import { GraphQLObjectType, GraphQLString } from "graphql";
 
 export const SignupPayload = new GraphQLObjectType({
@@ -8,7 +8,7 @@ export const SignupPayload = new GraphQLObjectType({
       type: GraphQLString,
     },
     error: {
-      type: Error,
+      type: Error
     },
   }),
 });

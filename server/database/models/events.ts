@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose'
 
-export type Event = {
+export interface Event {
   _id: string
   name: string
   location: string

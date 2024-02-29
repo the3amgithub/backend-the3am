@@ -9,7 +9,7 @@ export default async (_: null, args: { otp: number; _id: string }) => {
       error: { message: 'Invalid User', code: 'invalid_account' },
     }
   }
-  const otpVerification = verifyOtp(args.otp, findUser.otp)
+  const otpVerification = verifyOtp(args.otp)
   if (otpVerification) {
     const token = signToken(findUser)
     return {
